@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Services — McCallum Creative Co.</title>
+<link rel="stylesheet" href="/css/global.css"/>
+<style>
+/* ── PATH CARDS ── */
+.path-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; border: 1px solid var(--border); }
+.path-card {
+  padding: 3.5rem 2.5rem; border-right: 1px solid var(--border);
+  position: relative; overflow: hidden; transition: background .4s;
+}
+.path-card:last-child { border-right: none; }
+.path-card::before {
+  content:''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px; background: var(--accent,var(--teal));
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .5s cubic-bezier(.16,1,.3,1);
+}
+.path-card:hover::before { transform: scaleX(1); }
+.path-card:hover { background: var(--bg3); }
+.path-num { font-family: var(--disp); font-size: 3rem; color: var(--border); position: absolute; top: .5rem; right: 1.25rem; line-height: 1; transition: color .4s; }
+.path-card:hover .path-num { color: #252522; }
+.path-name { font-family: var(--disp); font-size: 2rem; letter-spacing: .04em; margin-bottom: 1rem; line-height: 1; color: var(--fg); }
+.path-tagline { font-family: var(--serif); font-style: italic; color: var(--accent,var(--teal)); font-size: 1rem; font-weight: 300; margin-bottom: 1.25rem; }
+.path-desc { font-size: .8rem; color: var(--dim); line-height: 1.9; margin-bottom: 1.75rem; }
+.path-list { list-style: none; }
+.path-list li { font-size: .75rem; color: var(--muted); padding: .35rem 0; border-bottom: 1px solid #111; display: flex; align-items: center; gap: .6rem; }
+.path-list li:last-child { border-bottom: none; }
+.path-list li::before { content:''; display:block; width:16px; height:1px; background:var(--accent,var(--teal)); opacity:.55; flex-shrink:0; }
+
+/* ── PROCESS ── */
+.process-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 0; }
+.process-step { padding: 3rem 3rem 3rem 0; border-right: 1px solid var(--border); position: relative; }
+.process-step:last-child { border-right: none; padding-right: 0; }
+.process-step:nth-child(2), .process-step:nth-child(3) { padding-left: 3rem; }
+.process-step::before { content:''; position:absolute; top:0; left:0; width:28px; height:1px; background:var(--teal); }
+.process-step:nth-child(2)::before, .process-step:nth-child(3)::before { left:3rem; }
+.process-num { font-family: var(--disp); font-size: .7rem; letter-spacing: .22em; color: var(--teal); opacity: .5; margin-bottom: 1.25rem; display: block; }
+.process-name { font-family: var(--disp); font-size: 1.8rem; letter-spacing: .04em; line-height: 1; color: var(--fg); margin-bottom: .9rem; }
+.process-desc { font-size: .8rem; color: var(--dim); line-height: 1.9; }
+
+/* ── PRICING ── */
+.pricing-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.25rem; }
+.pricing-card {
+  background: var(--bg2); border: 1px solid var(--border);
+  padding: 2.5rem 2rem; position: relative; transition: border-color .4s;
+}
+.pricing-card.featured { border-color: var(--teal); }
+.pricing-card.featured::before { content:'Most Popular'; position:absolute; top:-1px; left:50%; transform:translateX(-50%); font-size:.46rem; letter-spacing:.24em; text-transform:uppercase; padding:.28rem .8rem; background:var(--teal); color:#000; white-space:nowrap; }
+.pricing-tier { font-family: var(--disp); font-size: 1.6rem; letter-spacing: .04em; color: var(--fg); margin-bottom: .5rem; }
+.pricing-range { font-size: .72rem; color: var(--teal); letter-spacing: .1em; margin-bottom: 1.25rem; }
+.pricing-desc { font-size: .78rem; color: var(--dim); line-height: 1.85; margin-bottom: 1.75rem; }
+.pricing-includes { list-style: none; }
+.pricing-includes li { font-size: .72rem; color: var(--muted); padding: .3rem 0; border-bottom: 1px solid #111; display: flex; align-items: center; gap: .5rem; }
+.pricing-includes li:last-child { border-bottom: none; }
+.pricing-includes li::before { content:''; display:block; width:12px; height:1px; background:var(--teal); opacity:.5; flex-shrink:0; }
+
+@media(max-width:760px){
+  .path-grid { grid-template-columns: 1fr; }
+  .path-card { border-right: none; border-bottom: 1px solid var(--border); }
+  .process-grid { grid-template-columns: 1fr; }
+  .process-step { border-right: none; border-top: 1px solid var(--border); padding: 2.5rem 0; }
+  .process-step:nth-child(2), .process-step:nth-child(3) { padding-left: 0; }
+  .process-step::before, .process-step:nth-child(2)::before, .process-step:nth-child(3)::before { left: 0; }
+  .pricing-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/index.html" class="nav-logo">MC<span>C</span></a>
+  <ul class="nav-links">
+    <li><a href="/work.html">Work</a></li>
+    <li><a href="/services.html" class="active">Services</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="/contact.html" class="nav-cta">Start a Project</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/work.html" onclick="closeMenu()">Work</a>
+  <a href="/services.html" onclick="closeMenu()">Services</a>
+  <a href="/about.html" onclick="closeMenu()">About</a>
+  <a href="/contact.html" onclick="closeMenu()">Contact</a>
+  <div class="mobile-cta-wrap"><a href="/contact.html" class="btn btn-teal" onclick="closeMenu()">Start a Project</a></div>
+</div>
+
+<!-- HERO -->
+<div class="page-hero" style="min-height:52vh">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 75% 45%,rgba(45,212,191,.06) 0%,transparent 65%);pointer-events:none"></div>
+  <div class="page-hero-inner">
+    <div class="eyebrow reveal">What We Do</div>
+    <h1 class="hero-hl reveal">We build the work<br><em>your audience remembers.</em></h1>
+    <p class="hero-sub reveal">High-end video production, cinematic storytelling, and AI-powered content systems — built for organizations that are ready to scale without sacrificing quality.</p>
+    <div style="margin-top:2.5rem" class="reveal"><a href="/contact.html" class="btn btn-orange">Start a Project →</a></div>
+  </div>
+</div>
+
+<!-- CHOOSE YOUR PATH -->
+<section class="section border-b">
+  <div class="eyebrow reveal">Choose Your Path</div>
+  <h2 class="disp reveal" style="font-size:clamp(2.5rem,5.5vw,4.5rem);margin-bottom:3.5rem">Three ways<br>we work together</h2>
+  <div class="path-grid reveal">
+
+    <div class="path-card" style="--accent:var(--teal)">
+      <span class="path-num">01</span>
+      <div class="path-name">Content</div>
+      <div class="path-tagline">Ongoing creation.</div>
+      <p class="path-desc">For organizations that need a consistent, high-quality content rhythm — without the overhead of an in-house team. We become your production partner.</p>
+      <ul class="path-list">
+        <li>Monthly video content packages</li>
+        <li>Social-first vertical video</li>
+        <li>AI-assisted post-production</li>
+        <li>Sermon clips & ministry content</li>
+        <li>Reels, Shorts, LinkedIn video</li>
+      </ul>
+    </div>
+
+    <div class="path-card" style="--accent:var(--gold)">
+      <span class="path-num">02</span>
+      <div class="path-name">Story</div>
+      <div class="path-tagline">Cinematic depth.</div>
+      <p class="path-desc">For projects that require the full weight of film production — documentaries, brand films, and narratives that change how people see your organization.</p>
+      <ul class="path-list">
+        <li>Documentary films (short & feature)</li>
+        <li>Brand story films</li>
+        <li>Impact & fundraising films</li>
+        <li>Testimonial campaigns</li>
+        <li>Event & conference coverage</li>
+      </ul>
+    </div>
+
+    <div class="path-card" style="--accent:var(--orange)">
+      <span class="path-num">03</span>
+      <div class="path-name">Systems</div>
+      <div class="path-tagline">Built to scale.</div>
+      <p class="path-desc">For organizations ready to scale content output without scaling their budget. We build AI-assisted production workflows and content engines that run month after month.</p>
+      <ul class="path-list">
+        <li>AI content workflow setup</li>
+        <li>Auto-captioning & formatting</li>
+        <li>Multi-platform repurposing</li>
+        <li>One shoot → full content calendar</li>
+        <li>Training & handoff support</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- HOW WE WORK -->
+<section class="section border-b" style="background:var(--bg2)">
+  <div class="eyebrow reveal">Process</div>
+  <h2 class="disp reveal" style="font-size:clamp(2.5rem,5.5vw,4.5rem);margin-bottom:4rem">How we work</h2>
+  <div class="process-grid">
+    <div class="process-step reveal">
+      <span class="process-num">01</span>
+      <div class="process-name">Strategy</div>
+      <p class="process-desc">We start with a conversation, not a quote. We learn what you're trying to accomplish, who you're trying to reach, and what success looks like — then we build a plan around that.</p>
+    </div>
+    <div class="process-step reveal rd1">
+      <span class="process-num">02</span>
+      <div class="process-name">Production</div>
+      <p class="process-desc">Pre-production, shoot, edit — done with intention. We don't rush and we don't cut corners. Whether it's a single shoot day or a multi-day documentary, the craft shows up on screen.</p>
+    </div>
+    <div class="process-step reveal rd2">
+      <span class="process-num">03</span>
+      <div class="process-name">Distribution</div>
+      <p class="process-desc">A great film that no one sees is just a hard drive. We format, size, and deliver content built for every platform your audience uses — and we can help you build the system to keep it going.</p>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING GUIDANCE -->
+<section class="section border-b">
+  <div class="eyebrow reveal">Investment</div>
+  <h2 class="disp reveal" style="font-size:clamp(2.2rem,5vw,4rem);margin-bottom:.75rem">What it costs</h2>
+  <p class="reveal" style="color:var(--dim);font-size:.9rem;line-height:1.85;max-width:520px;margin-bottom:3.5rem">Every project is different. These ranges give you a starting point — we'll get specific once we understand your goals.</p>
+
+  <div class="pricing-grid">
+
+    <div class="pricing-card reveal">
+      <div class="pricing-tier">Content</div>
+      <div class="pricing-range">$1,500 – $4,000 / month</div>
+      <p class="pricing-desc">Ongoing monthly content packages. Ideal for ministries, nonprofits, and brands that need consistent video without a full-time team.</p>
+      <ul class="pricing-includes">
+        <li>4–12 short-form videos/month</li>
+        <li>Social-ready formatting</li>
+        <li>AI-assisted editing</li>
+        <li>Monthly strategy check-in</li>
+      </ul>
+    </div>
+
+    <div class="pricing-card featured reveal rd1">
+      <div class="pricing-tier">Story</div>
+      <div class="pricing-range">$5,000 – $25,000+</div>
+      <p class="pricing-desc">Cinematic brand films, documentaries, and narrative projects built with the care of a feature film. Priced by scope and complexity.</p>
+      <ul class="pricing-includes">
+        <li>Full pre-production</li>
+        <li>1–3 day production shoot</li>
+        <li>Professional color grade</li>
+        <li>Deliverables for all platforms</li>
+      </ul>
+    </div>
+
+    <div class="pricing-card reveal rd2">
+      <div class="pricing-tier">Systems</div>
+      <div class="pricing-range">$2,500 – $8,000 setup</div>
+      <p class="pricing-desc">One-time workflow build plus optional ongoing retainer. We set up your AI content system and train your team — or run it for you.</p>
+      <ul class="pricing-includes">
+        <li>Workflow audit & design</li>
+        <li>AI tool setup & integration</li>
+        <li>Template & automation build</li>
+        <li>Team training & handoff</li>
+      </ul>
+    </div>
+
+  </div>
+  <p class="reveal" style="font-size:.7rem;color:var(--muted);margin-top:2rem;letter-spacing:.08em">All pricing is project-specific. Reach out for a free 30-minute strategy call.</p>
+</section>
+
+<!-- FINAL CTA -->
+<section class="section-sm" style="text-align:center;background:var(--green)">
+  <div class="eyebrow reveal" style="justify-content:center;color:rgba(245,240,232,.5)">Get Started</div>
+  <h2 class="disp reveal" style="font-size:clamp(2.5rem,6vw,5rem);margin:.75rem 0 1.75rem">Ready when you are.</h2>
+  <p class="reveal" style="color:rgba(245,240,232,.5);font-size:.9rem;line-height:1.8;max-width:420px;margin:0 auto 2.5rem">Tell us what you're building. We'll tell you if we're the right fit — and if we are, we'll move fast.</p>
+  <a href="/contact.html" class="btn btn-solid reveal" style="margin:0 auto">Start a Project →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">MC<span>C</span> — McCallum Creative Co.</div>
+  <div class="footer-links"><a href="/work.html">Work</a><a href="/services.html">Services</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></div>
+  <div class="footer-copy">© 2024 McCallum Creative Co.</div>
+</footer>
+
+<script>
+let menuOpen=false;
+function toggleMenu(){menuOpen=!menuOpen;document.getElementById('hamburger').classList.toggle('open',menuOpen);document.getElementById('mobileMenu').classList.toggle('open',menuOpen);}
+function closeMenu(){menuOpen=false;document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target);}}),{threshold:.1});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

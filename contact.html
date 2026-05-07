@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Contact — McCallum Creative Co.</title>
+<link rel="stylesheet" href="/css/global.css"/>
+<style>
+/* ── CONTACT LAYOUT ── */
+.contact-grid { display: grid; grid-template-columns: 1fr 1fr; min-height: 70vh; }
+.contact-left { padding: 6rem 5% 6rem 6%; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+.contact-right { padding: 6rem 6% 6rem 5%; background: var(--bg2); display: flex; flex-direction: column; justify-content: center; }
+
+/* Contact details */
+.contact-detail { margin-bottom: 2.5rem; }
+.contact-detail-label { font-size: .55rem; letter-spacing: .32em; text-transform: uppercase; color: var(--teal); margin-bottom: .45rem; }
+.contact-detail-val { font-family: var(--serif); font-size: 1.25rem; font-weight: 300; color: var(--fg); }
+.contact-detail-val a { color: var(--fg); text-decoration: none; transition: color .3s; }
+.contact-detail-val a:hover { color: var(--teal); }
+
+/* Form */
+.form-group { margin-bottom: 1.75rem; }
+.form-group label { display: block; font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: var(--muted); margin-bottom: .6rem; }
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%; background: transparent; border: none;
+  border-bottom: 1px solid #252520; color: var(--fg);
+  font-family: var(--body); font-size: .9rem; font-weight: 300;
+  padding: .7rem 0; outline: none; transition: border-color .3s;
+  appearance: none; -webkit-appearance: none;
+}
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: #2A2A26; }
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus { border-bottom-color: var(--teal); }
+.form-group select option { background: #1A1A16; color: var(--fg); }
+.form-group textarea { resize: none; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.submit-btn {
+  width: 100%; background: transparent; border: 1px solid var(--orange);
+  color: var(--orange); font-family: var(--body); font-size: .68rem;
+  letter-spacing: .2em; text-transform: uppercase;
+  padding: 1rem; cursor: pointer; transition: all .3s; margin-top: .5rem;
+}
+.submit-btn:hover { background: var(--orange); color: var(--fg); }
+
+/* Success state */
+.form-success {
+  display: none; text-align: center; padding: 3rem;
+}
+.form-success.show { display: block; }
+.form-success h3 { font-family: var(--disp); font-size: 2rem; letter-spacing: .04em; color: var(--teal); margin-bottom: 1rem; }
+.form-success p { font-size: .85rem; color: var(--dim); line-height: 1.8; }
+
+/* FAQ */
+.faq-item { border-bottom: 1px solid var(--border); }
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 1.25rem 0; cursor: pointer; font-size: .85rem; color: var(--fg);
+  font-weight: 300; transition: color .3s; user-select: none;
+}
+.faq-q:hover { color: var(--teal); }
+.faq-icon { font-size: 1.2rem; color: var(--teal); transition: transform .3s; flex-shrink: 0; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a { font-size: .8rem; color: var(--dim); line-height: 1.85; padding: 0 0 1.25rem; display: none; }
+.faq-item.open .faq-a { display: block; }
+
+@media(max-width:760px){
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-left { padding: 4rem 6% 3rem; border-right: none; border-bottom: 1px solid var(--border); }
+  .contact-right { padding: 3rem 6% 4rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="/index.html" class="nav-logo">MC<span>C</span></a>
+  <ul class="nav-links">
+    <li><a href="/work.html">Work</a></li>
+    <li><a href="/services.html">Services</a></li>
+    <li><a href="/about.html">About</a></li>
+    <li><a href="/contact.html" class="active">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="/contact.html" class="nav-cta">Start a Project</a>
+    <button class="hamburger" id="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/work.html" onclick="closeMenu()">Work</a>
+  <a href="/services.html" onclick="closeMenu()">Services</a>
+  <a href="/about.html" onclick="closeMenu()">About</a>
+  <a href="/contact.html" onclick="closeMenu()">Contact</a>
+  <div class="mobile-cta-wrap"><a href="/contact.html" class="btn btn-teal" onclick="closeMenu()">Start a Project</a></div>
+</div>
+
+<!-- HERO -->
+<div class="page-hero" style="min-height:40vh">
+  <div style="position:absolute;inset:0;background:radial-gradient(ellipse 55% 55% at 60% 50%,rgba(45,212,191,.05) 0%,transparent 65%);pointer-events:none"></div>
+  <div class="page-hero-inner">
+    <div class="eyebrow reveal">Get In Touch</div>
+    <h1 class="hero-hl reveal">Start a<br><em>Project</em></h1>
+    <p class="hero-sub reveal">Tell us what you're building. We'll respond within 24 hours with honest thoughts — and if we're a good fit, we'll move fast.</p>
+  </div>
+</div>
+
+<!-- CONTACT GRID -->
+<div class="contact-grid border-b">
+
+  <!-- LEFT: INFO -->
+  <div class="contact-left">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom:2.5rem">Reach Out</div>
+
+      <div class="contact-detail">
+        <div class="contact-detail-label">Email</div>
+        <div class="contact-detail-val"><a href="mailto:hello@mccallumcreative.co">hello@mccallumcreative.co</a></div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Based In</div>
+        <div class="contact-detail-val">New York — Working Worldwide</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Response Time</div>
+        <div class="contact-detail-val">Within 24 hours</div>
+      </div>
+      <div class="contact-detail">
+        <div class="contact-detail-label">Free Strategy Call</div>
+        <div class="contact-detail-val">30 minutes, no obligation</div>
+      </div>
+    </div>
+
+    <!-- FAQ -->
+    <div style="margin-top:3.5rem" class="reveal">
+      <div class="eyebrow" style="margin-bottom:1.75rem">Common Questions</div>
+
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          How quickly can you start?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Most projects can begin within 2–3 weeks of our initial agreement. Ongoing content retainers can often start within the week.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you work with small organizations?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Yes. Many of our best clients are small teams with big missions. We have packages built specifically for organizations that need quality without a large production budget.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          What if I don't have a clear vision yet?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">That's fine — and actually common. The strategy conversation is where we help you figure that out. You don't need to arrive with all the answers.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          Do you work outside the US?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-a">Yes. We've filmed on four continents and have remote workflows that make international projects run smoothly.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: FORM -->
+  <div class="contact-right">
+    <div class="reveal">
+      <div class="eyebrow" style="margin-bottom:2rem">Project Details</div>
+    </div>
+
+    <form id="contactForm" onsubmit="handleSubmit(event)">
+      <div class="form-row reveal">
+        <div class="form-group">
+          <label>Your Name *</label>
+          <input type="text" name="name" placeholder="Craig Brown" required/>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" name="email" placeholder="craig@studio.co" required/>
+        </div>
+      </div>
+      <div class="form-group reveal rd1">
+        <label>Organization / Company</label>
+        <input type="text" name="company" placeholder="McCallum Creative Co."/>
+      </div>
+      <div class="form-group reveal rd1">
+        <label>Project Type *</label>
+        <select name="project_type" required>
+          <option value="">What are you looking to create?</option>
+          <option>Monthly Content Package</option>
+          <option>Brand Film / Commercial</option>
+          <option>Documentary Film</option>
+          <option>AI Content System</option>
+          <option>Campaign / Series</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="form-group reveal rd2">
+        <label>Budget Range (optional)</label>
+        <select name="budget">
+          <option value="">Select a range (optional)</option>
+          <option>Under $2,500</option>
+          <option>$2,500 – $5,000</option>
+          <option>$5,000 – $10,000</option>
+          <option>$10,000 – $25,000</option>
+          <option>$25,000+</option>
+          <option>Let's talk</option>
+        </select>
+      </div>
+      <div class="form-group reveal rd2">
+        <label>Tell Us About Your Project *</label>
+        <textarea name="message" placeholder="What are you trying to create, who's your audience, and what does success look like for you?" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn reveal rd3">Send Enquiry →</button>
+    </form>
+
+    <div class="form-success" id="formSuccess">
+      <h3>Message Received.</h3>
+      <p>Thank you for reaching out. We'll be in touch within 24 hours to discuss your project.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- BOTTOM CTA STRIP -->
+<section class="section-sm border-b" style="text-align:center;background:var(--bg2)">
+  <p class="reveal" style="font-size:.8rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase">Not ready to commit? That's fine.</p>
+  <h3 class="disp reveal" style="font-size:clamp(1.8rem,4vw,3rem);margin:.75rem 0 1.5rem">Book a free 30-minute strategy call.</h3>
+  <p class="reveal" style="font-size:.85rem;color:var(--dim);max-width:400px;margin:0 auto 2rem;line-height:1.8">No pitch, no pressure. Just a conversation about what you're building and whether we can help.</p>
+  <a href="mailto:hello@mccallumcreative.co?subject=Strategy Call Request" class="btn btn-teal reveal" style="margin:0 auto">Book a Call →</a>
+</section>
+
+<footer>
+  <div class="footer-logo">MC<span>C</span> — McCallum Creative Co.</div>
+  <div class="footer-links"><a href="/work.html">Work</a><a href="/services.html">Services</a><a href="/about.html">About</a><a href="/contact.html">Contact</a></div>
+  <div class="footer-copy">© 2024 McCallum Creative Co.</div>
+</footer>
+
+<script>
+let menuOpen=false;
+function toggleMenu(){menuOpen=!menuOpen;document.getElementById('hamburger').classList.toggle('open',menuOpen);document.getElementById('mobileMenu').classList.toggle('open',menuOpen);}
+function closeMenu(){menuOpen=false;document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
+const io=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('on');io.unobserve(x.target);}}),{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const isOpen = item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!isOpen) item.classList.add('open');
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  // Connect to Formspree: change action to https://formspree.io/f/YOUR_ID
+  // and remove this JS handler — the form will submit natively.
+  document.getElementById('contactForm').style.display = 'none';
+  document.getElementById('formSuccess').classList.add('show');
+}
+</script>
+</body>
+</html>
