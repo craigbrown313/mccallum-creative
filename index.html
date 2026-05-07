@@ -6,6 +6,7 @@
 <title>McCallum Creative Co. — Cinematic Studio & Creative Systems</title>
 <meta name="description" content="A cinematic production studio and AI workflow consultancy. We build the stories and the systems that make them move."/>
 <link rel="stylesheet" href="/css/global.css"/>
+<link rel="stylesheet" href="/css/scene3d.css"/>
 <style>
 /* ══════════════════════════════════════
    CUSTOM CURSOR
@@ -774,8 +775,11 @@ html { cursor: none; }
   <div class="footer-copy">© 2024 McCallum Creative Co. All rights reserved.</div>
 </footer>
 
+<!-- ── 3D SCENE LAYER ── -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="/js/scene3d.js" defer></script>
+
 <script>
-/* ── MOBILE MENU ── */
 let menuOpen=false;
 function toggleMenu(){menuOpen=!menuOpen;document.getElementById('hamburger').classList.toggle('open',menuOpen);document.getElementById('mobileMenu').classList.toggle('open',menuOpen);}
 function closeMenu(){menuOpen=false;document.getElementById('hamburger').classList.remove('open');document.getElementById('mobileMenu').classList.remove('open');}
